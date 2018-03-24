@@ -8,10 +8,19 @@ jQuery(function($){
 
 	stripeHistory();
 
-	$('form').on('submit', function(){
-		$('#chatHistory').append('<li>' + $('#message').val() + '</li>');
-		stripeHistory();
-		$('#message').val("");
-		return false;
-	})
 });
+
+var socket = io();
+
+$('form').on('submit', function(){
+	var text = $('#message').val();
+	$('#message').val("");
+	socket.emit("message", text);
+	return false;
+});
+
+socket.on('message', function(msg){
+	$('#chatHistory').append('<li>' + msg + '</li>');
+	stripeHistory();
+});
+
