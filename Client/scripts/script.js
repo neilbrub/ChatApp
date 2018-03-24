@@ -6,9 +6,6 @@ function stripeHistory(){
 
 jQuery(function($){
 
-	$('#heading').text("JS Time!");
-	$('#p1').text(gridSize(GRID));
-
 	stripeHistory();
 
 	$('form').on('submit', function(){
