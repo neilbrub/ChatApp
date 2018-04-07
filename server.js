@@ -4,6 +4,8 @@ var app = express();
 var http = require('http');
 var server = http.Server(app);
 
+var port = 8080;
+
 app.use(express.static('Client'));
 
 var io = require('socket.io')(server);
@@ -14,6 +16,6 @@ io.on('connection', function(socket){
 	});
 });
 
-server.listen(8080, function() {
-	console.log("Chat server running!");
+server.listen(port, function() {
+	console.log("Chat server running on port " + port + "!");
 });
