@@ -10,10 +10,11 @@ app.use(express.static('Client'));
 
 var io = require('socket.io')(server);
 
-io.on('connection', function(socket){
+io.on('connect', function(socket){
 	console.log("A user connected!");
 
 	socket.on('message', function(msg){
+		msg = msg + " appended!";
 		io.emit('message', msg);
 	});
 	
