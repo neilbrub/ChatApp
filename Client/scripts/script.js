@@ -17,7 +17,6 @@ $('form').on('submit', function(){
 	if(text != ""){
 		$('#message').val(""); //Clear the text input area
 		socket.emit("message", text);
-		socket.emit("another_thing");
 	}
 	return false;
 });
@@ -25,8 +24,4 @@ $('form').on('submit', function(){
 socket.on('message', function(msg){
 	$('#chatHistory').append('<li>' + msg + '</li>'); //Add the new comment!
 	stripeHistory();
-});
-
-socket.on('another_thing', function(){
-	console.log("And another thing!");
 });

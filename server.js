@@ -11,15 +11,15 @@ app.use(express.static('Client'));
 var io = require('socket.io')(server);
 
 io.on('connect', function(socket){
-	console.log("A user connected!");
+
+	console.log('A user connected!');
 
 	socket.on('message', function(msg){
-		msg = msg + " appended!";
 		io.emit('message', msg);
 	});
 	
 	socket.on('disconnect', function(socket){
-		console.log("A user disconnected!")
+		console.log('User disconnected!');
 	});
 });
 
