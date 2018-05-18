@@ -24,8 +24,10 @@ io.on('connect', function(socket){
 	
 	socket.on('disconnect', function(){
 		console.log(`\nUser ${socket_id + 1} disconnected!`);
-		(socket_id === allSockets.length - 1) ? allSockets.pop() : allSockets[socket_id] = null;
-		showSockets();
+		allSockets[socket_id] = null;
+		//(socket_id === allSockets.length - 1) ? allSockets.pop() : allSockets[socket_id] = null;
+		allSockets = pruneSockets(allSockets);
+		showSockets(allSockets);
 	});
 });
 
@@ -49,12 +51,20 @@ function insert(list, item){
 	return i;
 }
 
-function showSockets(){
-	console.log("All sockets:");
-	allSockets.forEach((socket) => {
+function pruneSockets(socketList){
+	while(socketList[socketList.length - 1] === null){
+		socketList.pop();
+		console.log("Popping")
+	}
+	return socketList;
+}
+
+function showSockets(socketList){
+	console.log("--All sockets--");
+	socketList.forEach((socket) => {
 		if(socket)
 			console.log(socket.id);
 		else
-			console.log("null element!");
+			console.log("null");
 	});
 }
